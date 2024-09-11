@@ -8,7 +8,7 @@ const createToken = (id, name, email) => {
   });
 };
 
-const user_sign_up = (req, res) => {
+module.exports.user_sign_up = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
     if (!name || !email || !password || !phone) {
@@ -17,13 +17,13 @@ const user_sign_up = (req, res) => {
         .json({ error: "Please fill all the blanks." });
     }
 
-    const salt = bcrypt.genSalt(10);
-    const hash_password = bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hash_password = await bcrypt.hash(password, salt);
     if (!hash_password)
       return res
         .status(httpStatusCodes.BAD_REQUEST)
         .json({ error: "Password cannot be hashed. Please try again." });
-    const response = USERMODEL.create({
+    const response = await USERMODEL.create({
       name,
       email,
       phone,
@@ -49,7 +49,7 @@ const user_sign_up = (req, res) => {
   }
 };
 
-const user_sign_in = (req, res) => {
+module.exports.user_sign_in = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -58,14 +58,14 @@ const user_sign_in = (req, res) => {
         .json({ error: "Please fill all the blanks." });
     }
 
-    const response = USERMODEL.findOne({ email });
+    const response = await USERMODEL.findOne({ email });
     if (!response) {
       return res
         .status(httpStatusCodes.BAD_REQUEST)
         .json({ error: "Invalid credentials. Please try again." });
     }
 
-    const match_password = bcrypt.compareSync(password, response.password);
+    const match_password = await bcrypt.compareSync(password, response.password);
     if (!match_password)
       return res
         .status(httpStatusCodes.BAD_REQUEST)
@@ -73,7 +73,7 @@ const user_sign_in = (req, res) => {
 
     return res
       .status(httpStatusCodes.OK)
-      .json({ response, msg: "Account has been created." });
+      .json({ response, msg: "You have successfully logged in." });
   } catch (error) {
     console.error(error);
     return res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
