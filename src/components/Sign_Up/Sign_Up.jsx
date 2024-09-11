@@ -12,7 +12,7 @@ function Sign_Up() {
   const register = async (e) => {
     e.preventDefault(); // Prevent default form submission
     // API Call to register user
-    const response = await fetch(`${import.meta.env.VITE_URL}/api/auth/register`, {
+    const response = await fetch(`${import.meta.env.VITE_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ function Sign_Up() {
   return (
     <div className="body">
       <div className="form-container">
-        <form>
+        <form onSubmit={register} >
           <h1>Sign Up</h1>
           <div className="input-control">
             <select name="role" id="role">
