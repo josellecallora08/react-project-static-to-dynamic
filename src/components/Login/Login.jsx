@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar.jsx";
 
 function Login() {
   // State variables for email and password
@@ -50,16 +51,31 @@ function Login() {
   };
   return (
     <div className="body">
+      <Navbar />
       <div className="form-container">
         <form>
           <h1>Login</h1>
 
           <div className="input-control">
-            <input type="email" placehold=" " name="" id="" />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder=" "
+              name=""
+              id=""
+            />
             <label for="">Email</label>
           </div>
           <div className="input-control">
-            <input type="password" placehold=" " name="" id="" />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder=" "
+              name="password"
+              id=""
+            />
             <label for="">Password</label>
           </div>
           <div className="input-control">

@@ -37,6 +37,7 @@ module.exports.user_sign_up = async (req, res) => {
     const token = createToken(response._id, response.name, response.email);
     res.cookie("token", token, { maxAge: 300000 });
 
+    console.log(response)
     return res
       .status(httpStatusCodes.OK)
       .json({ response, msg: "Account has been created.", token });

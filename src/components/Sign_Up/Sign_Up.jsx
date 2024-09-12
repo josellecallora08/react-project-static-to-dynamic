@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Sign_Up.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar.jsx";
 function Sign_Up() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,9 +26,10 @@ function Sign_Up() {
       }),
     });
     const json = await response.json(); // Parse the response JSON
-    if (json.authtoken) {
+    console.log(json)
+    if (json.token) {
       // Store user data in session storage
-      sessionStorage.setItem("auth-token", json.authtoken);
+      sessionStorage.setItem("token", json.token);
       sessionStorage.setItem("name", name);
       sessionStorage.setItem("phone", phone);
       sessionStorage.setItem("email", email);
@@ -47,8 +49,9 @@ function Sign_Up() {
 
   return (
     <div className="body">
+      <Navbar />
       <div className="form-container">
-        <form onSubmit={register} >
+        <form onSubmit={register}>
           <h1>Sign Up</h1>
           <div className="input-control">
             <select name="role" id="role">
@@ -103,7 +106,7 @@ function Sign_Up() {
             <label for="">Password</label>
           </div>
           <div className="input-control">
-            <input type="submit" value="Login" id="" />
+            <input type="submit" value="Signup" id="" />
           </div>
           <div className="input-control">
             <input type="reset" name="" id="" />

@@ -1,11 +1,13 @@
+import Navbar from '../Navbar/Navbar.jsx'
 function Landing_Page() {
-    return (
-        <>
-            <div>
-                Dashboard
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div>
+        <Navbar />
+        Dashboard
+      </div>
+    </>
+  );
 }
 
-export default Landing_Page
+export default Landing_Page;
