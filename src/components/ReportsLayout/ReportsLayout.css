@@ -1,0 +1,42 @@
+.reports-container {
+    margin: 20px;
+  }
+  
+  .reports-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .reports-table th,
+  .reports-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .reports-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .btn.view-btn {
+    background-color: #007bff;
+  }
+  
+  .btn.download-btn {
+    background-color: #28a745;
+  }
+  
+  .btn:hover {
+    opacity: 0.8;
+  }
+  

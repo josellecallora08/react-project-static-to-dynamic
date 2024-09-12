@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
   // Check if user is already authenticated, then redirect to home page
   useEffect(() => {
-    if (sessionStorage.getItem("auth-token")) {
+    if (sessionStorage.getItem("token")) {
       navigate("/");
     }
   }, []);
@@ -31,10 +31,12 @@ function Login() {
     });
     // Parse the response JSON
     const json = await res.json();
+    console.log(json)
     if (json.token) {
       // If authentication token is received, store it in session storage
-      sessionStorage.setItem("auth-token", json.token);
-      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("token", json.token);
+      sessionStorage.setItem("email", json.response.email);
+      sessionStorage.setItem("name", json.response.name);
       // Redirect to home page and reload the window
       navigate("/");
       window.location.reload();
@@ -53,7 +55,7 @@ function Login() {
     <div className="body">
       <Navbar />
       <div className="form-container">
-        <form>
+        <form onSubmit={login}>
           <h1>Login</h1>
 
           <div className="input-control">
